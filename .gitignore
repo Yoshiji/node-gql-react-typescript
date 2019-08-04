@@ -1,0 +1,5 @@
+build/
+node_modules/
+tsconfig.tsbuildinfo
+npm-debug.log
+src/graphql/types.d.ts
