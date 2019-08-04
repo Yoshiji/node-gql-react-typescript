@@ -1,9 +1,12 @@
-import { makeExecutableSchema } from 'graphql-tools';
-import { typeDef as TodoList } from './types/todo-list';
-import { SaveInput as SaveTodoListInput, SaveResponse as SaveTodoListResponse, SaveErrors as SaveTodoListErrors } 
-  from './mutations/save-todo-list';
-import gql from 'graphql-tag';
-import { MutationResolvers, QueryResolvers } from './types';
+import gql from "graphql-tag";
+import { makeExecutableSchema } from "graphql-tools";
+import {
+  SaveErrors as SaveTodoListErrors,
+  SaveInput as SaveTodoListInput,
+  SaveResponse as SaveTodoListResponse
+} from "./mutations/save-todo-list";
+import { MutationResolvers, QueryResolvers } from "./types";
+import { typeDef as TodoList } from "./types/todo-list";
 
 const Query = gql`
   type Query {
@@ -19,7 +22,8 @@ const Mutation = gql`
 `;
 
 const Schema = makeExecutableSchema({
-  typeDefs: [Query, Mutation, TodoList, SaveTodoListInput, SaveTodoListResponse, SaveTodoListErrors],
+  typeDefs:
+    [Query, Mutation, TodoList, SaveTodoListInput, SaveTodoListResponse, SaveTodoListErrors],
   resolvers: {
     Query: ({
       todo: () => ({ id: 1, name: "heyyo" }),
@@ -33,7 +37,7 @@ const Schema = makeExecutableSchema({
           errors: {
             all_messages: [args.input.name]
           }
-        }
+        };
       }
     }) as MutationResolvers
   }
@@ -41,4 +45,4 @@ const Schema = makeExecutableSchema({
 
 export {
   Schema
-}
+};

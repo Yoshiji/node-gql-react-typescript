@@ -11,8 +11,6 @@ Simple Todo list application
 
 ## Roadmap:
 
-- Linters
-
 - Persistence
   - ORM? MongoDB?
 

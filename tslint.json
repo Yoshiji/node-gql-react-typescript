@@ -1,0 +1,28 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint-eslint-rules"
+  ],
+  "jsRules": {},
+  "rules": {
+    "ter-indent": [true, 2],
+    "object-literal-sort-keys": false,
+    "no-any": true,
+    "no-multi-spaces": true,
+    "variable-name": {
+      "options": [
+        "allow-leading-underscore",
+        "allow-pascal-case",
+        "ban-keywords"
+      ]
+    },
+    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
+    "max-line-length": { "options": 100 }
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": [
+      "src/graphql/types.d.ts"
+    ]
+  }
+}

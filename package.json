@@ -17,13 +17,14 @@
     "nodemon": "^1.19.1",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
+    "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.5.3"
   },
   "scripts": {
     "start": "node build/index.js",
     "dev": "nodemon build/index.js",
     "tsc": "tsc",
-    "tslint": "tslint '**/*.ts'",
+    "tslint": "tslint -c tslint.json 'src/**/*.ts'",
     "graphql-codegen": "graphql-codegen"
   },
   "repository": {
