@@ -1,17 +1,19 @@
-import gql from "graphql-tag";
-import { makeExecutableSchema } from "graphql-tools";
+import gql from 'graphql-tag';
+import { makeExecutableSchema } from 'graphql-tools';
+import { getConnection } from 'typeorm';
+import { TodoList as TodoListModel } from '../entities/todo-list';
 import {
-  SaveErrors as SaveTodoListErrors,
   SaveInput as SaveTodoListInput,
+  saveResolver as SaveTodoListResolver,
   SaveResponse as SaveTodoListResponse
-} from "./mutations/save-todo-list";
-import { MutationResolvers, QueryResolvers } from "./types";
-import { typeDef as TodoList } from "./types/todo-list";
+} from './mutations/save-todo-list';
+import { MutationResolvers, QueryResolvers } from './types';
+import { typeDef as TodoList } from './types/todo-list';
 
 const Query = gql`
   type Query {
+    todoList(id: Int!): TodoList!
     todoLists: [TodoList!]!
-    todo(id: Int!): TodoList!
   }
 `;
 
@@ -23,22 +25,17 @@ const Mutation = gql`
 
 const Schema = makeExecutableSchema({
   typeDefs:
-    [Query, Mutation, TodoList, SaveTodoListInput, SaveTodoListResponse, SaveTodoListErrors],
+    [Query, Mutation, TodoList, SaveTodoListInput, SaveTodoListResponse],
   resolvers: {
     Query: ({
-      todo: () => ({ id: 1, name: "heyyo" }),
-      todoLists: () => []
+      // TODO: catch and return 404
+      todoList: (async (_, { id }) =>
+        (await getConnection().getRepository(TodoListModel).findOneOrFail(id))),
+      todoLists: (async () =>
+        (await getConnection().getRepository(TodoListModel).find()))
     }) as QueryResolvers,
     Mutation: ({
-      saveTodoList: (_, args, ctx) => {
-        return {
-          success: false,
-          data: null,
-          errors: {
-            all_messages: [args.input.name]
-          }
-        };
-      }
+      saveTodoList: SaveTodoListResolver
     }) as MutationResolvers
   }
 });

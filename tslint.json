@@ -1,6 +1,7 @@
 {
   "defaultSeverity": "error",
   "extends": [
+    "tslint:recommended",
     "tslint-eslint-rules"
   ],
   "jsRules": {},
@@ -17,12 +18,14 @@
       ]
     },
     "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
-    "max-line-length": { "options": 100 }
+    "max-line-length": { "options": 100 },
+    "quotemark": [true, "single", "avoid-escape"]
   },
   "rulesDirectory": [],
   "linterOptions": {
     "exclude": [
-      "src/graphql/types.d.ts"
+      "src/graphql/types.d.ts",
+      "node_modules/**/*"
     ]
   }
 }

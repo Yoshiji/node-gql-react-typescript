@@ -4,9 +4,14 @@
   "description": "test1",
   "main": "index.js",
   "dependencies": {
+    "@types/node": "^12.6.9",
+    "class-validator": "^0.9.1",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
-    "graphql": "^14.4.2"
+    "graphql": "^14.4.2",
+    "pg": "^7.12.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.18"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.4.0",
@@ -24,7 +29,7 @@
     "start": "node build/index.js",
     "dev": "nodemon build/index.js",
     "tsc": "tsc",
-    "tslint": "tslint -c tslint.json 'src/**/*.ts'",
+    "tslint": "tslint -c tslint.json '**/*.ts'",
     "graphql-codegen": "graphql-codegen"
   },
   "repository": {
